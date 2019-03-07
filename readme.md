@@ -64,6 +64,7 @@ Options:
   --all                 Commit/tag/push ALL pending files, not just the ones changed by bump
   --grep <filespec...>  Files and/or globs to do a text-replace of the old version number with the new one
   --lock                Update the package-lock.json file as well
+  --attribute <name>    The version attribute name to target (default is "version")
 
 Examples:
 
