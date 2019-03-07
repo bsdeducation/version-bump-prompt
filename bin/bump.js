@@ -25,6 +25,7 @@ program
   .option("--all", "Commit/tag/push ALL pending files, not just the ones changed by bump")
   .option("--grep <filespec...>", "Files and/or globs to do a text-replace of the old version number with the new one")
   .option("--lock", "Also update the package-lock.json")
+  .option("--attribute <name>", 'The version attribute name to target (default is "version")')
   .on("--help", () => {
     console.log(
       "\n  Examples:\n" +
@@ -54,7 +55,9 @@ else {
     options.commit = true;
   }
 
-  let manifests = api.manifests(options.lock);
+  options.versionAttributeName = program.attribute || "version";
+
+  let manifests = api.manifests(options);
   bumpManifests(manifests, options)
     .then(() => {
       api.grep(manifests, options);
